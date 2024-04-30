@@ -125,6 +125,10 @@ def _passed_with_testlist(path: str, test: str, testids: list[str]) -> bool:
                 f'{RESULTS_OUTPUT_OPTION}={results_json}',
             )
 
+        # pytest crashed
+        if not os.path.exists(results_json):
+            return False
+
         with open(results_json) as f:
             contents = json.load(f)
 
