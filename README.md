@@ -4,12 +4,19 @@
 detect-test-pollution
 =====================
 
-a tool to detect test pollution
+A tool to detect test pollution, e.g., it lets you bisect what the minimum
+number of tests you have to run before you trigger a failure in a test.
+
+This is a fork of https://github.com/asottile/detect-test-pollution with
+PyTorch specific improvements.
+
+TODO: Rename project so it is pip publishable
 
 ## installation
 
 ```bash
 pip install detect-test-pollution
+pip install git+https://github.com/ezyang/detect-test-pollution@main#egg=repo_name
 ```
 
 ## what is test pollution?
@@ -145,6 +152,15 @@ double checking we found it...
 ```
 
 [bug in pytest]: https://github.com/pytest-dev/pytest/issues/9708
+
+Once you've found the polluting test, you can use detect-test-pollution's pytest plugin
+to conveniently only run two tests in a particular order:
+
+```
+python ./testing -p detect_test_pollution --dtp-testids-input-file testids.txt
+```
+
+where testids.txt has the two tests you want to run one after another.
 
 ## fuzzing
 
